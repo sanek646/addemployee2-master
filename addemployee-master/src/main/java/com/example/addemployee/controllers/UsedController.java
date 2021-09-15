@@ -16,9 +16,9 @@ public class UsedController {
     }
 
 
-    @PostMapping("/")
-    // принимаем из html данные с полей формы
-   public String userAdd(@RequestParam(value = "firstname", required = false)String firstName,
+    @PostMapping("/") // получение из формы "post"
+
+   public String userAdd(@RequestParam(value = "firstname", required = false)String firstName, //  данные с полей формы
                          @RequestParam(value = "lastname",required = false)String lastName,
                          @RequestParam(value = "companyId",required = false)int companyId,
                          @RequestParam(value = "role", required = false)String role,
