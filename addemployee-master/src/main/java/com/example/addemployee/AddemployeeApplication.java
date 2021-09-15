@@ -7,9 +7,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@SpringBootApplication
-@EnableConfigurationProperties
-@EntityScan(basePackages = {"com"})
+@SpringBootApplication // спринг рулит
+@EnableConfigurationProperties // включение конфигурации из.....
+@EntityScan(basePackages = {"com"}) //
 @EnableJpaRepositories(basePackages = {"com"})
 @EnableTransactionManagement
 public class AddemployeeApplication {

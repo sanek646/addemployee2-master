@@ -4,14 +4,14 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name ="USERS")
+@Table(name ="USERS") //создание таблицы БД
 public class User implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO) // авто генерация ключа в БД
     @Column(name="ID")
     private Long Id;
 
-
+//создание колонок в БД
    @Column(name="FIRST_NAME")
     private String firstName;
    @Column(name="LAST_NAME")
@@ -21,10 +21,10 @@ public class User implements Serializable {
    @Column(name="ROLE")
     private String role;
 
-    public User() {
+    public User() { // создание пустого конструктора (Обязательно)
     }
 
-    public User(String firstName, String lastName, int companyId, String role) {
+    public User(String firstName, String lastName, int companyId, String role) { //создание конструктора с полями объектов
         this.firstName = firstName;
         this.lastName = lastName;
         this.companyId = companyId;
@@ -72,8 +72,8 @@ public class User implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "Users{" +
+    public String toString() { // строковый вид
+        return "User {" +
                 "Id=" + Id +
                 ", companyId=" + companyId +
                 ", firstName='" + firstName + '\'' +

@@ -7,21 +7,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UsedService {
-    private final UserRepository userRepository;
-
-  //  private User user;
-
+    private final UserRepository userRepository; // создание обьекта интерфейса UserRepository
 
     public UsedService(UserRepository userRepository) {
         this.userRepository = userRepository;
-    }
+    } // конструктор создание обьекта интерфейса UserRepository
 
-    @Transactional
-    public User addUser(String firstName, String lastName, int companyId, String role){
+    @Transactional //аннотация для работы с БД
 
-        User user = new User(firstName, lastName, companyId, role);
+    public User addUser(String firstName, String lastName, int companyId, String role){  // получаем из контроллера запрос от html ,создаем метод с аргументами
 
-       return userRepository.save(user);
+        User user = new User(firstName, lastName, companyId, role); // создаем обьект класса Юзвера с полями
+
+       return userRepository.save(user);// соханяем в базу и толкаем класс  в (heap)
     }
 
 }

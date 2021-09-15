@@ -1,6 +1,5 @@
 package com.example.addemployee.controllers;
 
-import com.example.addemployee.models.User;
 import com.example.addemployee.service.UsedService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +17,7 @@ public class UsedController {
 
 
     @PostMapping("/")
-
+    // принимаем из html данные с полей формы
    public String userAdd(@RequestParam(value = "firstname", required = false)String firstName,
                          @RequestParam(value = "lastname",required = false)String lastName,
                          @RequestParam(value = "companyId",required = false)int companyId,
@@ -27,9 +26,11 @@ public class UsedController {
 
 
         String user = usedService.addUser(firstName, lastName, companyId, role).toString();
-        model.addAttribute("userString", user);
+        // создание строковой переменной из класса usedService метода addUser с приведением к строке toString из heap
 
-        return "/about";
+        model.addAttribute("userString", user); //помещение содержимого перменной user в html
+
+        return "/edit";
     }
 
 }
