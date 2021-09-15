@@ -4,27 +4,27 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name ="users")
-public class Users implements Serializable {
+@Table(name ="USERS")
+public class User implements Serializable {
     @Id
-    @Column(name="Id")
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="ID")
     private Long Id;
 
 
-   @Column(name="firstName")
+   @Column(name="FIRST_NAME")
     private String firstName;
-   @Column(name="lastName")
+   @Column(name="LAST_NAME")
     private String lastName;
-    @Column(name="companyId")
+    @Column(name="COMPANY_ID")
     private int companyId;
-   @Column(name="role")
+   @Column(name="ROLE")
     private String role;
 
-    public Users() {
+    public User() {
     }
 
-    public Users(String firstName, String lastName,int companyId, String role) {
+    public User(String firstName, String lastName, int companyId, String role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.companyId = companyId;

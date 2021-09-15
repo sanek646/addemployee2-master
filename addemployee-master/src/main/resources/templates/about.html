@@ -10,7 +10,7 @@
 
 <div class="container mt-5">
     <h1>List of employees</h1>
-    <div th:each="el : ${posts}" class="alert alert-info mt-2">
+    <div th:each="el : ${user}" class="alert alert-info mt-2">
         <h3 th:text="${el.first_name}"/>
         <p th:text="${el.last_name}"/>
         <a th:href="'/blog/'+ ${el.id}" class="btn btn-warning" >detail</a>
