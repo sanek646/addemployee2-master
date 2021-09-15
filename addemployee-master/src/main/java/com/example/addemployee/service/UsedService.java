@@ -8,16 +8,20 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UsedService {
     private final UserRepository userRepository;
-    private User user;
+
+  //  private User user;
 
 
     public UsedService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
     @Transactional
-    public void addUser(User user){
-        this.user = user;
-        userRepository.save(user);
+    public User addUser(String firstName, String lastName, int companyId, String role){
+
+        User user = new User(firstName, lastName, companyId, role);
+
+       return userRepository.save(user);
     }
 
 }

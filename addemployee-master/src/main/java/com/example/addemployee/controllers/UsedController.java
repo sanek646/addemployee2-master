@@ -24,8 +24,11 @@ public class UsedController {
                          @RequestParam(value = "companyId",required = false)int companyId,
                          @RequestParam(value = "role", required = false)String role,
                          Model model){
-        User user = new User(firstName, lastName, companyId, role);
-        usedService.addUser(user);
+
+
+        String user = usedService.addUser(firstName, lastName, companyId, role).toString();
+        model.addAttribute("userString", user);
+
         return "/about";
     }
 
