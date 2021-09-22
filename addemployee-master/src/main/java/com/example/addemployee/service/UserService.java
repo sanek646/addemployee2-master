@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class UsedService {
+public class UserService {
     private final UserRepository userRepository; // создание обьекта интерфейса UserRepository
 
-    public UsedService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     } // конструктор создание обьекта интерфейса UserRepository
 

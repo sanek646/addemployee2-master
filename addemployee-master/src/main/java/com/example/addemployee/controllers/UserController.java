@@ -1,22 +1,22 @@
 package com.example.addemployee.controllers;
 
-import com.example.addemployee.service.UsedService;
+import com.example.addemployee.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class UsedController {
+public class UserController {
 
-    private final UsedService usedService;
+    private final UserService userService;
 
-    public UsedController(UsedService usedService) {
-        this.usedService = usedService;
+    public UserController(UserService usedService) {
+        this.userService = usedService;
     }
 
 
-    @PostMapping("/") // получение из формы "post"
+    @PostMapping("/") // получение из формы "post" (из html)
 
    public String userAdd(@RequestParam(value = "firstname", required = false)String firstName, //  данные с полей формы
                          @RequestParam(value = "lastname",required = false)String lastName,
@@ -25,12 +25,14 @@ public class UsedController {
                          Model model){
 
 
-        String user = usedService.addUser(firstName, lastName, companyId, role).toString();
+        String userAdd = userService.addUser(firstName, lastName, companyId, role).toString();
         // создание строковой переменной из класса usedService метода addUser с приведением к строке toString из heap
 
-        model.addAttribute("userString", user); //помещение содержимого перменной user в html
+        model.addAttribute("userString", userAdd); //помещение содержимого перменной user в html
 
         return "/edit";
     }
+
+
 
 }
