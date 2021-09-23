@@ -1,8 +1,10 @@
 package com.example.addemployee.controllers;
 
+import com.example.addemployee.models.User;
 import com.example.addemployee.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -33,6 +35,12 @@ public class UserController {
         return "/edit";
     }
 
+    @GetMapping("/about")
 
+    public String userList(Model model) {
+        Iterable<User> users = userService.allUser();
+        model.addAttribute("posts", users);
+        return "employee";
 
+    }
 }
