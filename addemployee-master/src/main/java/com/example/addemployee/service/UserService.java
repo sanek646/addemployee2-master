@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Optional;
+
 @Service
 public class UserService {
 @Autowired
@@ -28,6 +31,16 @@ public class UserService {
     public Iterable<User> allUser(){
         Iterable<User> users = userRepository.findAll();
         return users;
+    }
+    @Transactional
+    public ArrayList<User> editUser(){
+     if (!userRepository.existsById(id)) {
+        return "redirect:/blog";
+    }
+    Optional<User> post = userRepository.findById(id);
+    ArrayList<User> res = new ArrayList<>();
+        post.ifPresent(res::add);
+    return res;
     }
 }
 
