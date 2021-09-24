@@ -13,6 +13,7 @@
     <div th:each="el : ${post}" class="alert alert-info mt-2">
         <h3 th:text="${el.firstName}"/>
         <p th:text="${el.lastName}"/>
+        <p th:text="${el.companyId}"/>
         <a th:href="'/blog/'+ ${el.id}+'/edit'" class="btn btn-warning" >Redirect</a>
         <form th:action="'/blog/' + ${el.id} +'/remove'"method="post" >
             <button class="btn btn-warning" type="submit">Delete</button>

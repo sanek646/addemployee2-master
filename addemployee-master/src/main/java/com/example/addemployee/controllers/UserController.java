@@ -10,59 +10,52 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
-import java.util.Optional;
+
 
 @Controller
 public class UserController {
 
     private final UserService userService;
-
     public UserController(UserService usedService) {
         this.userService = usedService;
     }
 
 
-    @PostMapping("/") // получение из формы "post" (из html)
-
-   public String userAdd(@RequestParam(value = "firstname", required = false)String firstName, //  данные с полей формы
+    @PostMapping("/add")
+    public String userAdd(@RequestParam(value = "firstname", required = false)String firstName,
                          @RequestParam(value = "lastname",required = false)String lastName,
                          @RequestParam(value = "companyId",required = false)int companyId,
                          @RequestParam(value = "role", required = false)String role,
                          Model model){
-
-
         String userAdd = userService.addUser(firstName, lastName, companyId, role).toString();
-        // создание строковой переменной из класса usedService метода addUser с приведением к строке toString из heap
-
-        model.addAttribute("userString", userAdd); //помещение содержимого перменной user в html
-
-        return "/addedit";
+        model.addAttribute("userString", userAdd);
+        return "/add-edit";
     }
 
     @GetMapping("/about")
-
     public String userList(Model model) {
         Iterable<User> users = userService.allUser();
         model.addAttribute("posts", users);
-        return "employee";
-
+        return "/employee";
     }
+
     @GetMapping("/blog/{id}")
     public String userDetails(@PathVariable(value = "id") long id,
                               Model model) {
         ArrayList res = userService.editDetails(id);
         model.addAttribute("post", res);
-        return "employee-details";
+        return "/employee-details";
     }
+
     @GetMapping("/blog/{id}/edit")
     public String userEdit(@PathVariable(value = "id") long id,
                               Model model) {
         ArrayList res = userService.editUser(id);
         model.addAttribute("post", res);
-        return "employee-edit";
+        return "/employee-edit";
     }
-    @PostMapping("/blog/{id}/edit") //
 
+    @PostMapping("/blog/{id}/edit")
     public String userUpdate(@PathVariable(value = "id") long id,
                              @RequestParam(value = "firstname", required = false)String firstName,
                           @RequestParam(value = "lastname",required = false)String lastName,
@@ -71,15 +64,12 @@ public class UserController {
                           Model model){
 
         String userUpdate = userService.updateUser(firstName, lastName, companyId, role, id).toString();
-
         model.addAttribute("userString", userUpdate);
-
         return "redirect:/about";
     }
-    @PostMapping("/blog/{id}/remove") //
 
+    @PostMapping("/blog/{id}/remove")
     public String userDelete(@PathVariable(value = "id") long id, Model model){
-
         userService.deleteUser(id);
         return "redirect:/about";
     }

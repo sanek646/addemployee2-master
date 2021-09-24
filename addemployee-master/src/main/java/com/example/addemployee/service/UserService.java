@@ -11,20 +11,16 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-@Autowired
-    private final UserRepository userRepository; // создание обьекта интерфейса UserRepository
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    } // конструктор создание обьекта интерфейса UserRepository
+    @Autowired
+    private final UserRepository userRepository;
+    public UserService(UserRepository userRepository) { this.userRepository = userRepository;
+    }
 
-    @Transactional //аннотация для работы с БД
-
-    public User addUser(String firstName, String lastName, int companyId, String role){  // получаем из контроллера запрос от html ,создаем метод с аргументами
-
-        User user = new User(firstName, lastName, companyId, role); // создаем обьект класса Юзвера с полями
-       // System.out.println(user);
-       return userRepository.save(user);// соханяем в базу и толкаем класс  в (heap)
+    @Transactional
+    public User addUser(String firstName, String lastName, int companyId, String role){
+        User user = new User(firstName, lastName, companyId, role);
+        return userRepository.save(user);
     }
 
     @Transactional
@@ -32,6 +28,7 @@ public class UserService {
         Iterable<User> users = userRepository.findAll();
         return users;
     }
+
     @Transactional
     public ArrayList editDetails(long id){
      /*if (!userRepository.existsById(id)) {
@@ -42,6 +39,7 @@ public class UserService {
         post.ifPresent(res::add);
     return res;
     }
+
     @Transactional
     public ArrayList editUser(long id){
      /*if (!userRepository.existsById(id)) {
@@ -52,25 +50,21 @@ public class UserService {
         post.ifPresent(res::add);
         return res;
     }
+
     @Transactional
-
     public User updateUser(String firstName, String lastName, int companyId, String role, long id){
-
         User user = userRepository.findById(id).orElseThrow();
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setCompanyId(companyId);
         user.setRole(role);
-
         return userRepository.save(user);
     }
+
     @Transactional
-
     public void deleteUser( long id){
-
         User user = userRepository.findById(id).orElseThrow();
         userRepository.delete(user);
-       // return null;
     }
 }
 
