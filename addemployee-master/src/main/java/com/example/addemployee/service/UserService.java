@@ -33,7 +33,7 @@ public class UserService {
         return users;
     }
     @Transactional
-    public ArrayList editUser(long id){
+    public ArrayList editDetails(long id){
      /*if (!userRepository.existsById(id)) {
         return "redirect:/employee";
     }*/
@@ -41,6 +41,36 @@ public class UserService {
     ArrayList<User> res = new ArrayList<>();
         post.ifPresent(res::add);
     return res;
+    }
+    @Transactional
+    public ArrayList editUser(long id){
+     /*if (!userRepository.existsById(id)) {
+        return "redirect:/employee";
+    }*/
+        Optional<User> post = userRepository.findById(id);
+        ArrayList<User> res = new ArrayList<>();
+        post.ifPresent(res::add);
+        return res;
+    }
+    @Transactional
+
+    public User updateUser(String firstName, String lastName, int companyId, String role, long id){
+
+        User user = userRepository.findById(id).orElseThrow();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setCompanyId(companyId);
+        user.setRole(role);
+
+        return userRepository.save(user);
+    }
+    @Transactional
+
+    public void deleteUser( long id){
+
+        User user = userRepository.findById(id).orElseThrow();
+        userRepository.delete(user);
+       // return null;
     }
 }
 

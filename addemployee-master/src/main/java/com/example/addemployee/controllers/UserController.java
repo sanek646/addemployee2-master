@@ -36,7 +36,7 @@ public class UserController {
 
         model.addAttribute("userString", userAdd); //помещение содержимого перменной user в html
 
-        return "/edit";
+        return "/addedit";
     }
 
     @GetMapping("/about")
@@ -50,10 +50,37 @@ public class UserController {
     @GetMapping("/blog/{id}")
     public String userDetails(@PathVariable(value = "id") long id,
                               Model model) {
-        ArrayList res = userService.editUser(id);
-
+        ArrayList res = userService.editDetails(id);
         model.addAttribute("post", res);
-
         return "employee-details";
+    }
+    @GetMapping("/blog/{id}/edit")
+    public String userEdit(@PathVariable(value = "id") long id,
+                              Model model) {
+        ArrayList res = userService.editUser(id);
+        model.addAttribute("post", res);
+        return "employee-edit";
+    }
+    @PostMapping("/blog/{id}/edit") //
+
+    public String userUpdate(@PathVariable(value = "id") long id,
+                             @RequestParam(value = "firstname", required = false)String firstName,
+                          @RequestParam(value = "lastname",required = false)String lastName,
+                          @RequestParam(value = "companyId",required = false)int companyId,
+                          @RequestParam(value = "role", required = false)String role,
+                          Model model){
+
+        String userUpdate = userService.updateUser(firstName, lastName, companyId, role, id).toString();
+
+        model.addAttribute("userString", userUpdate);
+
+        return "redirect:/about";
+    }
+    @PostMapping("/blog/{id}/remove") //
+
+    public String userDelete(@PathVariable(value = "id") long id, Model model){
+
+        userService.deleteUser(id);
+        return "redirect:/about";
     }
 }
