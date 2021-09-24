@@ -33,10 +33,10 @@ public class UserService {
         return users;
     }
     @Transactional
-    public ArrayList<User> editUser(){
-     if (!userRepository.existsById(id)) {
-        return "redirect:/blog";
-    }
+    public ArrayList editUser(long id){
+     /*if (!userRepository.existsById(id)) {
+        return "redirect:/employee";
+    }*/
     Optional<User> post = userRepository.findById(id);
     ArrayList<User> res = new ArrayList<>();
         post.ifPresent(res::add);

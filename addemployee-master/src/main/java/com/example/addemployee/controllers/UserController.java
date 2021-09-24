@@ -50,6 +50,7 @@ public class UserController {
     @GetMapping("/blog/{id}")
     public String userDetails(@PathVariable(value = "id") long id,
                               Model model) {
+        ArrayList res = userService.editUser(id);
 
         model.addAttribute("post", res);
 
