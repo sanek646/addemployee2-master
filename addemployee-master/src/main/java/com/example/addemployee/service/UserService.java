@@ -14,7 +14,7 @@ public class UserService {
 
     @Autowired
     private final UserRepository userRepository;
-    public UserService(UserRepository userRepository) { this.userRepository = userRepository;
+         public UserService(UserRepository userRepository) { this.userRepository = userRepository;
     }
 
     @Transactional
@@ -31,20 +31,14 @@ public class UserService {
 
     @Transactional
     public ArrayList editDetails(long id){
-     /*if (!userRepository.existsById(id)) {
-        return "redirect:/employee";
-    }*/
-    Optional<User> post = userRepository.findById(id);
-    ArrayList<User> res = new ArrayList<>();
+        Optional<User> post = userRepository.findById(id);
+         ArrayList<User> res = new ArrayList<>();
         post.ifPresent(res::add);
     return res;
     }
 
     @Transactional
     public ArrayList editUser(long id){
-     /*if (!userRepository.existsById(id)) {
-        return "redirect:/employee";
-    }*/
         Optional<User> post = userRepository.findById(id);
         ArrayList<User> res = new ArrayList<>();
         post.ifPresent(res::add);
