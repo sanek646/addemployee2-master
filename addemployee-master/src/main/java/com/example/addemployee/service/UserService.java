@@ -2,7 +2,7 @@ package com.example.addemployee.service;
 
 import com.example.addemployee.models.User;
 import com.example.addemployee.repo.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    @Autowired
+
     private final UserRepository userRepository;
          public UserService(UserRepository userRepository) { this.userRepository = userRepository;
     }
@@ -46,7 +46,7 @@ public class UserService {
     }
 
     @Transactional
-    public User updateUser(String firstName, String lastName, int companyId, String role, long id){
+    public User updateUser(long id,String firstName, String lastName, int companyId, String role){
         User user = userRepository.findById(id).orElseThrow();
         user.setFirstName(firstName);
         user.setLastName(lastName);

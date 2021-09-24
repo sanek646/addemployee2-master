@@ -63,7 +63,7 @@ public class UserController {
                           @RequestParam(value = "role", required = false)String role,
                           Model model){
 
-        String userUpdate = userService.updateUser(firstName, lastName, companyId, role, id).toString();
+        String userUpdate = userService.updateUser(id,firstName, lastName, companyId, role).toString();
         model.addAttribute("userString", userUpdate);
         return "redirect:/about";
     }
