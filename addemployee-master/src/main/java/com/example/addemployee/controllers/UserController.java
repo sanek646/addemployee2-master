@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
+
 
 
 @Controller
@@ -39,23 +39,23 @@ public class UserController {
         return "/employee";
     }
 
-    @GetMapping("/blog/{id}")
+    @GetMapping("/employee/{id}")
     public String userDetails(@PathVariable(value = "id") long id,
                               Model model) {
-        ArrayList res = userService.editDetails(id);
-        model.addAttribute("post", res);
+       // ArrayList res = userService.editDetails(id);
+        model.addAttribute("post", userService.editDetails(id));
         return "/employee-details";
     }
 
-    @GetMapping("/blog/{id}/edit")
+    @GetMapping("/employee/{id}/edit")
     public String userEdit(@PathVariable(value = "id") long id,
                               Model model) {
-        ArrayList res = userService.editUser(id);
-        model.addAttribute("post", res);
+
+        model.addAttribute("post", userService.editUser(id));
         return "/employee-edit";
     }
 
-    @PostMapping("/blog/{id}/edit")
+    @PostMapping("/employee/{id}/edit")
     public String userUpdate(@PathVariable(value = "id") long id,
                              @RequestParam(value = "firstname", required = false)String firstName,
                           @RequestParam(value = "lastname",required = false)String lastName,
@@ -68,7 +68,7 @@ public class UserController {
         return "redirect:/about";
     }
 
-    @PostMapping("/blog/{id}/remove")
+    @PostMapping("/employee/{id}/remove")
     public String userDelete(@PathVariable(value = "id") long id, Model model){
         userService.deleteUser(id);
         return "redirect:/about";

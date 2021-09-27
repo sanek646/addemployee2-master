@@ -30,18 +30,20 @@ public class UserService {
     }
 
     @Transactional
-    public ArrayList editDetails(long id){
-        Optional<User> post = userRepository.findById(id);
+    public User editDetails(long id){
+       /* Optional<User> post = userRepository.findById(id);
          ArrayList<User> res = new ArrayList<>();
-        post.ifPresent(res::add);
+        post.ifPresent(res::add);*/
+        User res  = userRepository.findById(id).orElseThrow();
     return res;
     }
 
     @Transactional
-    public ArrayList editUser(long id){
-        Optional<User> post = userRepository.findById(id);
+    public User editUser(long id){
+        /*Optional<User> post = userRepository.findById(id);
         ArrayList<User> res = new ArrayList<>();
-        post.ifPresent(res::add);
+        post.ifPresent(res::add);*/
+        User res  = userRepository.findById(id).orElseThrow();
         return res;
     }
 
