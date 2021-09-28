@@ -1,5 +1,7 @@
 package com.example.addemployee.models;
 
+import com.opencsv.bean.CsvBindByName;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -9,16 +11,23 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) // авто генерация ключа в БД
     @Column(name="ID")
+    @CsvBindByName(column = "id")
     private Long Id;
 
-//создание колонок в БД
    @Column(name="FIRST_NAME")
+   @CsvBindByName(column = "first_name")
     private String firstName;
+
    @Column(name="LAST_NAME")
+   @CsvBindByName(column = "last_name")
     private String lastName;
+
     @Column(name="COMPANY_ID")
+    @CsvBindByName(column = "company_id")
     private int companyId;
+
    @Column(name="ROLE")
+   @CsvBindByName(column = "role")
     private String role;
 
     public User() { // создание пустого конструктора (Обязательно)
