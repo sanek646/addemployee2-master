@@ -82,6 +82,6 @@ if (file.isEmpty()){
 }else {
         userService.appLoadCsv(file);
 }
-        return "employee-add";
+        return "employee";
     }
 }

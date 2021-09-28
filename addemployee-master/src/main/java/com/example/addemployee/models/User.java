@@ -11,7 +11,7 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) // авто генерация ключа в БД
     @Column(name="ID")
-
+    @CsvBindByName(column = "id")
     private Long Id;
 
    @Column(name="FIRST_NAME")
