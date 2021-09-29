@@ -2,6 +2,10 @@ package com.example.addemployee.controllers;
 
 import com.example.addemployee.models.User;
 import com.example.addemployee.service.UserService;
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 
 @Controller
@@ -76,5 +83,26 @@ public class UserController {
             userService.uploadCsv(file);
         }
         return "add-edit";
+    }
+    @GetMapping("/export-users")
+    public void exportCSV(HttpServletResponse response) throws Exception {
+
+        //set file name and content type
+        String filename = "users.csv";
+
+        response.setContentType("text/csv");
+        response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
+                "attachment; filename=\"" + filename + "\"");
+
+        //create a csv writer
+        StatefulBeanToCsv<User> writer = new StatefulBeanToCsvBuilder<User>(response.getWriter())
+                .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
+                .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
+                .withOrderedResults(false)
+                .build();
+        List<User> users = (List<User>)userService.listAllUser();
+        //write all users to csv file
+        writer.write(users);
+
     }
 }
