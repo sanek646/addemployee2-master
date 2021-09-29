@@ -75,13 +75,14 @@ public class UserController {
 
     @PostMapping("/adding a list")
     public String uploadCSVFile(@RequestParam(value = "file") MultipartFile file, Model model){
-if (file.isEmpty()){
+    if (file.isEmpty()){
     model.addAttribute("mes","please");
     System.out.println("empty");
 
-}else {
+    }else {
+
         userService.appLoadCsv(file);
-}
+    }
         return "employee";
     }
 }
