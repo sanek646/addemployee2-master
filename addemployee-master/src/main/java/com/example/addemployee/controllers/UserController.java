@@ -22,10 +22,10 @@ public class UserController {
 
     @PostMapping("/add")
     public String userAdd(@RequestParam(value = "firstname", required = false)String firstName,
-                         @RequestParam(value = "lastname",required = false)String lastName,
-                         @RequestParam(value = "companyId",required = false)int companyId,
-                         @RequestParam(value = "role", required = false)String role,
-                         Model model){
+                          @RequestParam(value = "lastname",required = false)String lastName,
+                          @RequestParam(value = "companyId",required = false)int companyId,
+                          @RequestParam(value = "role", required = false)String role,
+                          Model model){
         String userAdd = userService.addUser(firstName, lastName, companyId, role).toString();
         model.addAttribute("userString", userAdd);
         return "/add-edit";
@@ -33,22 +33,14 @@ public class UserController {
 
     @GetMapping("/about")
     public String userList(Model model) {
-        Iterable<User> users = userService.allUser();
+        Iterable<User> users = userService.listAllUser();
         model.addAttribute("posts", users);
         return "/employee";
     }
 
-    @GetMapping("/employee/{id}")
-    public String userDetails(@PathVariable(value = "id") long id,
-                              Model model) {
-       // ArrayList res = userService.editDetails(id);
-        model.addAttribute("post", userService.editDetails(id));
-        return "/employee-details";
-    }
-
     @GetMapping("/employee/{id}/edit")
     public String userEdit(@PathVariable(value = "id") long id,
-                              Model model) {
+                           Model model) {
 
         model.addAttribute("post", userService.editUser(id));
         return "/employee-edit";
@@ -57,10 +49,10 @@ public class UserController {
     @PostMapping("/employee/{id}/edit")
     public String userUpdate(@PathVariable(value = "id") long id,
                              @RequestParam(value = "firstname", required = false)String firstName,
-                          @RequestParam(value = "lastname",required = false)String lastName,
-                          @RequestParam(value = "companyId",required = false)int companyId,
-                          @RequestParam(value = "role", required = false)String role,
-                          Model model){
+                             @RequestParam(value = "lastname",required = false)String lastName,
+                             @RequestParam(value = "companyId",required = false)int companyId,
+                             @RequestParam(value = "role", required = false)String role,
+                             Model model){
 
         String userUpdate = userService.updateUser(id,firstName, lastName, companyId, role).toString();
         model.addAttribute("userString", userUpdate);
@@ -73,16 +65,16 @@ public class UserController {
         return "redirect:/about";
     }
 
-    @PostMapping("/adding a list")
+    @PostMapping("/uploadCSVFile")
     public String uploadCSVFile(@RequestParam(value = "file") MultipartFile file, Model model){
-    if (file.isEmpty()){
-    model.addAttribute("mes","please");
-    System.out.println("empty");
+        if (file.isEmpty()){
+            model.addAttribute("mes","please");
+            System.out.println("empty");
 
-    }else {
+        }else {
 
-        userService.appLoadCsv(file);
-    }
-        return "employee";
+            userService.uploadCsv(file);
+        }
+        return "add-edit";
     }
 }

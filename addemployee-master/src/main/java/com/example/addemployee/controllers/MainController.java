@@ -16,6 +16,6 @@ public class MainController {
     @GetMapping("/all")
     public String add( Model model) {
         model.addAttribute("title", "First page");
-        return "employee-add";
+        return "employeeNewAdd";
     }
 }

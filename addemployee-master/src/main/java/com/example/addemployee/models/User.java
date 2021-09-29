@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name ="users") //создание таблицы БД
+@Table(name ="users") //описание схемы БД
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) // авто генерация ключа в БД
@@ -14,20 +14,20 @@ public class User implements Serializable {
     @CsvBindByName(column = "id")
     private Long Id;
 
-   @Column(name="first_name")
-   @CsvBindByName(column = "first_name")
+    @Column(name="first_name")
+    @CsvBindByName(column = "first_name")
     private String firstName;
 
-   @Column(name="last_name")
-   @CsvBindByName(column = "last_name")
+    @Column(name="last_name")
+    @CsvBindByName(column = "last_name")
     private String lastName;
 
     @Column(name="company_id")
     @CsvBindByName(column = "company_id")
     private int companyId;
 
-   @Column(name="role")
-   @CsvBindByName(column = "role")
+    @Column(name="role")
+    @CsvBindByName(column = "role")
     private String role;
 
     public User() { // создание пустого конструктора (Обязательно)
